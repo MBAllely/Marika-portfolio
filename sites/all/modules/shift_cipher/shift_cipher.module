@@ -23,7 +23,7 @@ function shift_cipher_form() {
         '#title' => 'Shift Value',
         '#type' => 'textfield',
         '#description' => 'Enter the number of places to shift each letter over',
-        '#element_validate' => array('element_validate_number'),
+        '#element_validate' => array('element_validate_integer'),
         '#required' => TRUE,
     );
     $form['shift_direction'] = array(
@@ -50,6 +50,10 @@ function shift_cipher_form_validate($form, &$form_state) {
     $shift_value = $form_state['values']['shift_value'];
     $shift_direction = $form_state['values']['shift_direction'];
     $user_input = $form_state['values']['user_input'];
+
+    if ($shift_value < 0) {
+        form_set_error('', 'Shift value must be a positive integer.');
+    }
 }
 
 function shift_cipher_form_submit($form, &$form_state) {
