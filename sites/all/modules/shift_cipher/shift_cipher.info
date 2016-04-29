@@ -1,0 +1,5 @@
+name = Shift Cipher
+description = A classic Caesar cipher
+package = Custom Modules
+core = 7.x
+files[] = shift_cipher.module

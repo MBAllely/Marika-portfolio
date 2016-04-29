@@ -1,0 +1,41 @@
+<?php
+
+function shift_cipher_menu() {
+    $items['shift_cipher'] = array(
+        'title' => 'Shift Cipher',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('shift_cipher_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['shift_cipher_success_page'] = array(
+        'title' => 'Your cipher:',
+        'page callback' => 'shift_cipher_success',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function shift_cipher_form() {
+    $form['shift_value'] = array(
+        '#title' => 'Shift Value',
+        '#type' => 'textfield',
+        '#description' => 'Enter the number of places to shift each letter over',
+        '#element_validate' => array('element_validate_number'),
+        '#required' => TRUE,
+    );
+    $form['shift_direction'] = array(
+        '#title' => 'Shift Direction',
+        '#type' => 'textfield',
+        '#description' => 'Enter the direction to shift each letter over. "Left" or "Right"',
+        '#required' => TRUE,
+    );
+    $form['user_input'] = array(
+        '#title' => 'Input phrase',
+        '#type' => 'textfield',
+        '#description' => 'Enter the phrase to be encrypted.  Only letters, spaces, and punctuation are allowed',
+        '#required' => TRUE,
+    );
+}
