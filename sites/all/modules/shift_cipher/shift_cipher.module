@@ -59,16 +59,68 @@ function shift_cipher_form_validate($form, &$form_state) {
         form_set_error('', 'Shift direction must be "left" or "right".');
     }
 
-    if (preg_match('/[^a-zA-Z\s.,?!":;_&]/', $user_input)) {
+    if (preg_match("/[^a-zA-Z\s.,?!':;_&()_]/", $user_input)) {
         form_set_error('', 'Input phrase may only contain letters, spaces, and punctuation');
     }
 
 }
 
 function shift_cipher_form_submit($form, &$form_state) {
+    $shift_value = (($form_state['values']['shift_value']) % 26);
+    $shift_direction = strtolower($form_state['values']['shift_direction']);
+    $user_input = strtolower($form_state['values']['user_input']);
+    $split_input_as_words = explode(' ', $user_input);
+    $encrypted_words = array();
+
+
+    //Encrypts each word individually to avoid issues with spaces
+    foreach($split_input_as_words as $word) {
+        $encrypted_letters = array();
+        $letters = str_split($word);
+
+        foreach($letters as $letter) {
+            if (ctype_alnum($letter)) {
+                //convert letter to ascii value
+                $ascii_value = ord($letter);
+
+                //add or subtract the shift value
+                if ($shift_direction == 'left') {
+                    $shifted_ascii_value = $ascii_value - $shift_value;
+                } else {
+                    $shifted_ascii_value = $ascii_value + $shift_value;
+                }
+                if ($shifted_ascii_value > 122) {
+                    $shifted_ascii_value -= 26;
+                }
+                if ($shifted_ascii_value < 97) {
+                    $shifted_ascii_value += 26;
+                }
+
+                //convert new ascii value to letter
+                $converted_letter = chr($shifted_ascii_value);
+
+                //push letter to an array of letters
+                array_push($encrypted_letters, $converted_letter);
+            } else {
+                //punctuation
+                array_push($encrypted_letters, $letter);
+            }
+        }
+        //implode the array of letters to the new encrypted word
+        $encrypted_word = implode($encrypted_letters);
+
+        //push encrypted words into output array of words
+        array_push($encrypted_words, $encrypted_word);
+    }
+    $output = implode(" ", $encrypted_words);
+
+    //save output to session variable
+    $_SESSION['encrypted_words'] = $output;
+
     $form_state['redirect'] = 'shift_cipher_success_page';
 }
 
 function shift_cipher_success() {
-    return "Hooray we did it";
+    $result = $_SESSION['encrypted_words'];
+    return $result;
 }

@@ -1,5 +1,5 @@
 1. Presents a custom form with 3 text inputs: shift value, direction, and phrase to be encrypted
-2. Input is validated (shift value as a positive integer,shift direction as 'right' or 'left', phrase only contains letters, spaces, and punctuation)
+2. Input is validated (shift value as a positive integer, shift direction as 'right' or 'left', phrase only contains letters, spaces, and punctuation)
 3. Input is compared against an associative array (['A'] => 1, ['B'] => 2, etc.)
 4.
 
