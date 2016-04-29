@@ -51,14 +51,16 @@ function shift_cipher_form_validate($form, &$form_state) {
     $shift_direction = strtolower($form_state['values']['shift_direction']);
     $user_input = $form_state['values']['user_input'];
 
-    var_dump($shift_direction);
-
     if ($shift_value < 0) {
         form_set_error('', 'Shift value must be a positive integer.');
     }
 
     if (($shift_direction != 'left') && ($shift_direction != 'right')) {
         form_set_error('', 'Shift direction must be "left" or "right".');
+    }
+
+    if (preg_match('/[^a-zA-Z\s.,?!":;_&]/', $user_input)) {
+        form_set_error('', 'Input phrase may only contain letters, spaces, and punctuation');
     }
 
 }
