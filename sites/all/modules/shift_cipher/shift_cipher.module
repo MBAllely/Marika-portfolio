@@ -10,7 +10,7 @@ function shift_cipher_menu() {
     );
     $items['shift_cipher_success_page'] = array(
         'title' => 'Your cipher:',
-        'page callback' => 'shift_cipher_success',
+        'page callback' => array('shift_cipher_success'),
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
@@ -38,4 +38,24 @@ function shift_cipher_form() {
         '#description' => 'Enter the phrase to be encrypted.  Only letters, spaces, and punctuation are allowed',
         '#required' => TRUE,
     );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Encrypt',
+    );
+
+    return $form;
+}
+
+function shift_cipher_form_validate($form, &$form_state) {
+    $shift_value = $form_state['values']['shift_value'];
+    $shift_direction = $form_state['values']['shift_direction'];
+    $user_input = $form_state['values']['user_input'];
+}
+
+function shift_cipher_form_submit($form, &$form_state) {
+    $form_state['redirect'] = 'shift_cipher_success_page';
+}
+
+function shift_cipher_success() {
+    return "Hooray we did it";
 }
