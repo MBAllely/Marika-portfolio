@@ -44,4 +44,5 @@ All you need to deploy is to visit localhost:8888. The app is currently not host
 ## License
 
 This software is licensed under the MIT license.
+
 Copyright (c) 2016 _**Marika 'Space Pants' Allely**_.

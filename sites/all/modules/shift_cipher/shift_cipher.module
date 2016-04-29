@@ -34,7 +34,7 @@ function shift_cipher_form() {
     );
     $form['user_input'] = array(
         '#title' => 'Input phrase',
-        '#type' => 'textfield',
+        '#type' => 'textarea',
         '#description' => 'Enter the phrase to be encrypted.  Only letters, spaces, and punctuation are allowed',
         '#required' => TRUE,
     );
@@ -72,6 +72,8 @@ function shift_cipher_form_submit($form, &$form_state) {
     $split_input_as_words = explode(' ', $user_input);
     $encrypted_words = array();
 
+    $_SESSION['user_input'] = $form_state['values']['user_input'];
+
 
     //Encrypts each word individually to avoid issues with spaces
     foreach($split_input_as_words as $word) {
@@ -79,7 +81,10 @@ function shift_cipher_form_submit($form, &$form_state) {
         $letters = str_split($word);
 
         foreach($letters as $letter) {
+
+            //verifies that each item is a letter
             if (ctype_alnum($letter)) {
+
                 //convert letter to ascii value
                 $ascii_value = ord($letter);
 
@@ -89,6 +94,7 @@ function shift_cipher_form_submit($form, &$form_state) {
                 } else {
                     $shifted_ascii_value = $ascii_value + $shift_value;
                 }
+                //edge case management
                 if ($shifted_ascii_value > 122) {
                     $shifted_ascii_value -= 26;
                 }
@@ -102,7 +108,8 @@ function shift_cipher_form_submit($form, &$form_state) {
                 //push letter to an array of letters
                 array_push($encrypted_letters, $converted_letter);
             } else {
-                //punctuation
+
+                //punctuation is untouched
                 array_push($encrypted_letters, $letter);
             }
         }
@@ -122,5 +129,5 @@ function shift_cipher_form_submit($form, &$form_state) {
 
 function shift_cipher_success() {
     $result = $_SESSION['encrypted_words'];
-    return $result;
+    return '<p> You entered: "' . $_SESSION['user_input'] . '"</p><p>The ecryption is: <strong>'  . $result . '</strong></p>';
 }
