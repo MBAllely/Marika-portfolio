@@ -11,9 +11,4 @@ function outside_links_follow_networks_alter(&$networks, $uid = 0) {
       'domain' => 'github.com',
     );
 
-    $networks[$uid]['linkedin'] = array(
-      'title' => t('LinkedIn'),
-      'domain' => 'linkedin.com',
-    );
-
 }
