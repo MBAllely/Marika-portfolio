@@ -1,0 +1,19 @@
+<?php
+
+function outside_links_follow_networks_alter(&$networks, $uid = 0) {
+    $networks[$uid]['etsy'] = array(
+        'title' => t('Etsy'),
+        'domain' => 'etsy.com',
+    );
+
+    $networks[$uid]['github'] = array(
+      'title' => t('GitHub'),
+      'domain' => 'github.com',
+    );
+
+    $networks[$uid]['linkedin'] = array(
+      'title' => t('LinkedIn'),
+      'domain' => 'linkedin.com',
+    );
+
+}

@@ -1,0 +1,5 @@
+name = Follow extension
+description = Follow module
+package = Other
+core = 7.x
+files[] = outside_links.module
