@@ -1,0 +1,16 @@
+name = personalized subtheme
+description = a drupal subtheme
+core = 7.x
+engine = phptemplate
+stylesheets[all][] = css/style.css
+
+; base
+base theme = radix_stanley
+
+; Regions
+regions[welcome] = Welcome Section
+regions[sidebar_left] = Sidebar Left
+regions[content] = Content
+regions[footer_col_left] = Footer Column Left
+regions[footer_col_center] = Footer Column Center
+regions[footer_col_right] = Footer Column Right

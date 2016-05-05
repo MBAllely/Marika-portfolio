@@ -1,0 +1,10 @@
+7.x-1.x, 2016-04-08
+-------------------
+- Merge pull request #3 from lsolesen/update-radix-33.
+- Update to Radix 3.3.
+- Merge branch '7.x-1.x' of github.com:arshad/radix_stanley into 7.x-1.x.
+- Add README.md.
+- Merge pull request #2 from vredeling/7.x-1.x.
+- Added missing colorizer styles.
+- Fixed tpl comments.
+- Merge pull request #1 from jkswoods/7.x-1.x.
