@@ -52,35 +52,39 @@
   </div><!-- /ww -->
 <?php endif; ?>
 
-<div id="sidebar-left" class="container">
-    <?php print render($page['sidebar_left']); ?>
-</div>
+<div class="main row">
 
-<div id="content" class="container pt">
-  <?php if ($messages): ?>
-    <div id="messages">
-      <?php print $messages; ?>
+    <div id="sidebar-left" class="container col-sm-3">
+        <?php print render($page['sidebar_left']); ?>
     </div>
-  <?php endif; ?>
 
-  <?php if ($title): ?>
-    <div class="page-header centered">
-      <h1 class="title"><?php print $title; ?></h1>
-    </div>
-  <?php endif; ?>
+    <div id="content" class="container pt col-sm-9">
+      <?php if ($messages): ?>
+        <div id="messages">
+          <?php print $messages; ?>
+        </div>
+      <?php endif; ?>
 
-  <?php if ($tabs): ?>
-    <div id="tabs">
-      <?php print render($tabs); ?>
-    </div>
-  <?php endif; ?>
+      <?php if ($title): ?>
+        <div class="page-header centered">
+          <h1 class="title"><?php print $title; ?></h1>
+        </div>
+      <?php endif; ?>
 
-  <?php if ($action_links): ?>
-    <?php print render($action_links); ?>
-  <?php endif; ?>
+      <?php if ($tabs): ?>
+        <div id="tabs">
+          <?php print render($tabs); ?>
+        </div>
+      <?php endif; ?>
 
-  <?php print render($page['content']); ?>
-</div><!-- /container -->
+      <?php if ($action_links): ?>
+        <?php print render($action_links); ?>
+      <?php endif; ?>
+
+      <?php print render($page['content']); ?>
+    </div><!-- /container -->
+
+</div><!-- /main -->
 
 <div id="footer" class="footer">
   <div class="container">
