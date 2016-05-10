@@ -58,12 +58,13 @@
         <?php print render($page['sidebar_left']); ?>
     </div>
 
-    <div id="content" class="container pt col-sm-9">
+    <div id="content" class="container pt col-sm-6">
       <?php if ($messages): ?>
         <div id="messages">
           <?php print $messages; ?>
         </div>
       <?php endif; ?>
+
 
       <?php if ($title): ?>
         <div class="page-header centered">
@@ -83,6 +84,11 @@
 
       <?php print render($page['content']); ?>
     </div><!-- /container -->
+
+
+  <div id="sidebar-right" class="container col-sm-3">
+    <?php print render($page['sidebar_right']); ?>
+  </div>
 
 </div><!-- /main -->
 

@@ -10,6 +10,7 @@ base theme = radix_stanley
 ; Regions
 regions[welcome] = Welcome Section
 regions[sidebar_left] = Sidebar Left
+regions[sidebar_right] = Sidebar Right
 regions[content] = Content
 regions[footer_col_left] = Footer Column Left
 regions[footer_col_center] = Footer Column Center
