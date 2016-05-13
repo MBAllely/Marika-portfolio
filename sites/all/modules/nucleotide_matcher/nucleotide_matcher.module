@@ -40,3 +40,36 @@ function nucleotide_matcher_form_validate($form, &$form_state) {
         form_set_error('', 'Input phrase may only contain A, C, T, and G.  Sorry, no uracil.');
     }
 }
+
+function nucleotide_matcher_form_submit($form, &$form_state) {
+    $user_input = strtoupper($form_state['values']['dna_input']);
+    $input_array = str_split($user_input);
+
+    $_SESSION['dna_input'] = implode(" ", $input_array);
+
+    $output_array = [];
+
+    for ($i = 0; $i < strlen($user_input); $i++) {
+        if ($input_array[$i] == 'A') {
+            $output_array[$i] = 'T';
+        } elseif ($input_array[$i] == 'T') {
+            $output_array[$i] = 'A';
+        } elseif ($input_array[$i] == 'C') {
+            $output_array[$i] = 'G';
+        } elseif ($input_array[$i] == 'G') {
+            $output_array[$i] = 'C';
+        }
+    }
+
+    $output = implode(" ", $output_array);
+
+    $_SESSION['dna_output'] = $output;
+
+    $form_state['redirect'] = 'nucleotide_matcher_success_page';
+}
+
+function nucleotide_matcher_success() {
+    $result = $_SESSION['dna_output'];
+
+    return '<p>You entered: ' . $_SESSION['dna_input'] . '</p><p>The reverse is: <strong>' . $result . '</strong></p>';
+}
