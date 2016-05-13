@@ -1,0 +1,42 @@
+<?php
+function nucleotide_matcher_menu() {
+    $items['nucleotide_matcher'] = array(
+        'title' => 'Nucleotide Matcher',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('nucleotide_matcher_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['nucleotide_matcher_success_page'] = array(
+        'title' => 'DNA!',
+        'page callback' => array('nucleotide_matcher_success'),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+function nucleotide_matcher_form() {
+    $form['dna_input'] = array(
+        '#title' => 'DNA Input',
+        '#type' => 'textfield',
+        '#description' => 'Enter "A", "T", "C", and "G" only.',
+        '#required' => TRUE,
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Go!',
+    );
+
+    return $form;
+}
+
+function nucleotide_matcher_form_validate($form, &$form_state) {
+    $user_input = strtoupper($form_state['values']['dna_input']);
+
+    if (preg_match("/[^ACGT]/", $user_input)) {
+        form_set_error('', 'Input phrase may only contain A, C, T, and G.  Sorry, no uracil.');
+    }
+}

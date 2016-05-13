@@ -1,0 +1,5 @@
+name = Nucleotide Matcher
+description = Completes DNA input
+package = Custom Modules
+core = 7.x
+files[] = nucleotide_matcher.module
