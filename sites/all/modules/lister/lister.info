@@ -1,0 +1,5 @@
+name = My Ajax Node Loader
+description = Display Project Nodes with Ajax
+package = Custom Modules
+core = 7.x
+files[] = lister.module

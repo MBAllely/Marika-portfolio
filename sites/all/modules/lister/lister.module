@@ -1,0 +1,30 @@
+<?php
+function lister_menu() {
+    $items['path-to-ajax/%/%'] = array(
+        'access arguments' => array('access content'),
+        'page callback' => 'lister_ajax_callback',
+        'page arguments' => array(1,2),
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+
+function lister_ajax_callback($js, $node_id) {
+    $node = node_load($node_id);
+
+    if ($js == 'nojs') {
+        drupal_goto('node/' . $node_id);
+    }
+
+    //Get render array for the node and render it into HTML
+    $build = node_view($node);
+    $html = render($build);
+
+    //Prepare and ajax command to insert the node's HTML into our div under the wrapper
+    $commands = [];
+    $commands[] = ajax_command_html('#lister-ajax-wrapper', $html);
+
+    //Render the commands into JSON format and execute them by printing them to the browser.
+    print ajax_render($commands);
+    exit;
+}
