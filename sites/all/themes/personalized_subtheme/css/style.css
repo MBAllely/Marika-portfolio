@@ -3,6 +3,30 @@
     height: auto;
 }
 
+.follow-link-wrapper {
+    padding-top: 5px;
+}
+
+a.follow-link-github {
+  background-image: url(/sites/all/modules/follow/icons/flat-icons/github-icon.png);
+  background-size: 25px;
+}
+
+a.follow-link-linkedin {
+  background-image: url(/sites/all/modules/follow/icons/flat-icons/LinkedIn-icon.png);
+  background-size: 25px;
+}
+
+a.follow-link-facebook {
+  background-image: url(/sites/all/modules/follow/icons/flat-icons/Facebook-icon.png);
+  background-size: 25px;
+}
+
+a.follow-link-this-site {
+  background-image: url(/sites/all/modules/follow/icons/flat-icons/RSS-icon.png);
+  background-size: 25px;
+}
+
 .main {
     padding-left: 2em;
     padding-right: 2em;
