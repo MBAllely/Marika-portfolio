@@ -1,6 +1,6 @@
-img {
-    max-width: 800px;
-    max-height: 600px;
+.field-name-field-screenshot img {
+    max-width:100%;
+    height: auto;
 }
 
 .main {
@@ -10,4 +10,9 @@ img {
 
 #sidebar-left {
     padding: 2em;
+}
+
+#logo {
+    max-width: 80px;
+    max-height: 80px;
 }

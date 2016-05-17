@@ -21,7 +21,7 @@
 
       <?php if ($logo): ?>
         <a href="<?php print $front_page; ?>" id="logo" class="pull-left">
-          <img src="<?php print $logo; ?>" />
+          <img id="logo" src="<?php print $logo; ?>" />
         </a>
       <?php endif; ?>
 
