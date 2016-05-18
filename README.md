@@ -31,7 +31,7 @@ You will need the following things properly installed on your computer.
 ## Usernames and Passwords
 * DB: `Marika:password`
 * DB username: `Marika-admin:password`
-* Drupal site maintenance account: `admin:password`
+* Drupal site maintenance account: `Marika:password`
 
 ## Running / Development
 
