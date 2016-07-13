@@ -29,6 +29,8 @@ function radix_form($variables) {
  */
 function radix_container($variables) {
   $element = $variables['element'];
+  // Ensure an array is always passed to drupal_attributes().
+  $element['#attributes'] = is_array($element['#attributes']) ? $element['#attributes'] : array();
 
   // Special handling for form elements.
   if (isset($element['#array_parents'])) {
@@ -111,7 +113,7 @@ function _radix_process_input(&$element, &$form_state) {
     'select_as_checkboxes',
   );
 
-  if (!empty($element['#type']) && in_array($element['#type'], $types) && (empty($element['#theme']) || !in_array($element['#theme'], $skip_themes))) {
+  if (!empty($element['#type']) && in_array($element['#type'], $types) && (empty($element['#theme']) || (!empty($element['#theme']) && !in_array($element['#theme'], $skip_themes)))) {
     $element['#attributes']['class'][] = 'form-control';
   }
 

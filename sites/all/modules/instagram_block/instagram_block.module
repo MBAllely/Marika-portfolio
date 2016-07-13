@@ -6,20 +6,55 @@
  */
 
 /**
+ * Implements hook_help().
+ */
+function instagram_block_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#instagram_block':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Instagram Block module a is a very simple module that integrates with Instagram and creates a block containing your most recent Instagram posts. The block\'s configuration page lets you choose how many posts and what size they should appear in the block. The images are individually exposed to the drupal theme layer, so developers have access to an all of the variables provided by the Instagram api should they choose to extent the block. For more information, see the <a href="!online">online documentation</a> for the Instagram Block module.', array('!online' => 'https://www.drupal.org/node/2727025')) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dd>' . t('To begin using Instagram Block there are 2 things that need configuring, the connection to instagram and the settings for the block. For step by step instructions see the <a href="!online">online documentation</a> for the Instagram Block module.', array('!online' => 'https://www.drupal.org/node/2727025')) . '</dd>';
+      $output .= '<dt>' . t('Connecting to Instagram') . '</dt>';
+      $output .= '<dd>' . t('Instagram Block requires connecting to a specific Instagram account. You need to be able to log into that account when asked to. The <a href="!help">Authenticate with Instagram</a> page helps with the setup.', array('!help' => 'https://www.drupal.org/node/2746185')) . '</dd>';
+      $output .= '<dt>' . t('Configuring block settings') . '</dt>';
+      $output .= '<dd>' . t('The Instagram Block page is located at admin/structure/block and provides for configuration of an Instagram block in a similar way to those of other blocks on your site.  This page makes it easy for you to configure the size and number of images that you want to show from your Instagram account.') . '</dd>';
+      $output .= '</dl>';
+      return $output;
+      break;
+    case 'admin/config/services/instagram_block':
+      $output = '';
+      $output .= '<h3>' . t('Connecting to Instagram') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dd>' . t('Instagram Block requires connecting to a specific Instagram account. You need to be able to log into that account when asked to. The <a href="!help">Authenticate with Instagram</a> page helps with the setup.', array('!help' => 'https://www.drupal.org/node/2746185')) . '</dd>';
+      $output .= '</dl>';
+      return $output;
+      break;
+  }
+}
+
+/**
  * Implements hook_block_info().
  *
  * Defines the new instagram block.
  */
 function instagram_block_block_info() {
+  // @todo Find a better way to manage access for tag block.
+  $tag_block = variable_get('instagram_block_enable_tag_block', FALSE);
+
   $blocks['instagram_block'] = array(
     'info' => t('Instagram Block - User Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
-  $blocks['instagram_block_tag'] = array(
-    'info' => t('Instagram Block - Tag Block'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
-  );
+  if ($tag_block) {
+    $blocks['instagram_block_tag'] = array(
+      'info' => t('Instagram Block - Tag Block'),
+      'cache' => DRUPAL_CACHE_GLOBAL,
+    );
+  }
 
   return $blocks;
 }
@@ -203,7 +238,12 @@ function instagram_block_block_view($delta = '') {
       );
     }
   }
-  $block['content'] = $content;
+
+  $block['content'] = theme('instagram_block', array(
+    'content' => $content,
+    'response' => $response
+  ));
+
   return $block;
 }
 
@@ -231,6 +271,10 @@ function instagram_block_theme() {
     'instagram_block_image' => array(
       'variables' => array('height' => NULL,'width' => NULL, 'src' => NULL, 'href' => NULL, 'post' => NULL),
       'template' => 'instagram-block-image',
+    ),
+    'instagram_block' => array(
+      'variables' => array('content' => NULL, 'response' => NULL),
+      'template' => 'instagram-block',
     ),
   );
 }

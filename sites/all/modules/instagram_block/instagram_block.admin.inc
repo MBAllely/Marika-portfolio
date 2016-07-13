@@ -27,9 +27,10 @@ function instagram_block_admin_settings($form, &$form_state) {
   $content .= l(t('here'), $path, $options);
   $content .= '.';
 
-  $form['authorise'] = array(
+  // @todo Find another way to help people authenticate.
+  /*$form['authorise'] = array(
     '#markup' => $content,
-  );
+  );*/
 
   // Create a keyed array of blank defaults for the storage variable.
   $empty = array(

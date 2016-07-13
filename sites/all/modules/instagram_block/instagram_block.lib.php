@@ -240,12 +240,12 @@ class InstagramPost {
       $this->caption = new InstagramComment($instagram_post->caption);
     }
 
-    if ($instagram_post->comments->count) {
+    if ($instagram_post->comments->count && !empty($instagram_post->comments->data)) {
       $this->comment_count = $instagram_post->comments->count;
       $this->comments = $this->get_comments($instagram_post->comments->data);
     }
 
-    if ($instagram_post->likes->count) {
+    if ($instagram_post->likes->count && !empty($instagram_post->likes->data)) {
       $this->like_count = $instagram_post->likes->count;
       $this->likes = $this->get_likes($instagram_post->likes->data);
     }
@@ -369,8 +369,13 @@ class InstagramLocation {
       $this->name = $location->name;
     }
 
-    $this->latitude = $location->latitude;
-    $this->longitude = $location->longitude;
+    if (isset($location->latitude)) {
+      $this->latitude = $location->latitude;
+    }
+
+    if (isset($location->longitude)) {
+      $this->longitude = $location->longitude;
+    }
   }
 }
 

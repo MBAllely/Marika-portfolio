@@ -29,9 +29,9 @@ stylesheets-conditional[IE 8][all][] = assets/stylesheets/ie8.css
 scripts[] = assets/js/hover.zoom.js
 scripts[] = assets/js/radix_stanley.script.js
 
-; Information added by Drupal.org packaging script on 2016-04-08
-version = "7.x-1.3"
+; Information added by Drupal.org packaging script on 2016-06-23
+version = "7.x-1.4"
 core = "7.x"
 project = "radix_stanley"
-datestamp = "1460137446"
+datestamp = "1466722804"
 
