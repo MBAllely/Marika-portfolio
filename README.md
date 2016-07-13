@@ -22,7 +22,7 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * Start up mamp and point servers to main directory
 * Go to localhost:8888/phpmyadmin in browser and import `Marika.sql.zip` DB found in Marika-portfolio/sites/db-backup
-* Create DB username `Marika-admin` with password `password`
+* Create DB username `Marika-admin` under type `localhost` with password `password`
 * Go to localhost:8888 to view Drupal project.
 
 ## Databases Used
